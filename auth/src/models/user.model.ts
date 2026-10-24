@@ -12,6 +12,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+} , {
+  toJSON : {
+    transform( doc , ret ){
+      const { _id , password , __v , ...rest } = ret;
+      return { id : _id , ...rest };
+    }
+  }
 });
 
 userSchema.pre( 'save' , async function () {
