@@ -9,7 +9,7 @@ import { NotFoundError } from "./errors/not-found-error";
 import mongoose from "mongoose";
 
 const app = express();
-app.set('trust proxy', true);
+app.set("trust proxy", true);
 app.use(express.json());
 app.use(
   cookieSession({
@@ -26,19 +26,4 @@ app.use(async (_, __, next) => {
 });
 app.use(errorHandler);
 
-const start = async () => {
-  if(!process.env.JWT_SECRET){
-    throw new Error('jwt secret is required')
-  }
-  try {
-    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth");
-    console.log("db connected");
-  } catch (err) {
-    console.log(err);
-  }
-  app.listen(3000, () => {
-    console.log("Auth service is listening on 3000");
-  });
-};
-
-start();
+export { app };
