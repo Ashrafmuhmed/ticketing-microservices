@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
 import { CustomError } from "../errors/custom-error";
 export const errorHandler = (
   err: Error,
@@ -11,6 +9,6 @@ export const errorHandler = (
   if (err instanceof CustomError) {
     res.status(err.statusCode).send({ errors: err.formatError() });
   } else {
-    res.status(400).send("Internal server error");
+    res.status(400).send({ errors: [{ message: "Something went wrong" }] });
   }
 };

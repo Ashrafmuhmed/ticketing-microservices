@@ -5,8 +5,8 @@ export class AuthValidation {
     body("email").trim().isEmail().withMessage("email must be valid"),
     body("password")
       .trim()
-      .isLength({ min: 4, max: 8 })
-      .withMessage("password must be 4 - 8"),
+      .notEmpty()
+      .withMessage("You must supply a password"),
   ];
 
   static signupValidator = [
