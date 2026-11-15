@@ -1,5 +1,5 @@
 import { UserModel } from "../models/user.model";
-import { BadRequestError } from "../errors/bad-request-error";
+import { BadRequestError } from "@ashraf.tickets/common";
 export const UserRepository = {
   async createUser(user: { email: string; password: string }) {
     try {

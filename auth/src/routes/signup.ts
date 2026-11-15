@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { UserRepository } from "../repositories/user.repository";
 import jwt from "jsonwebtoken";
 import { AuthValidation } from "../validators/auth.validator";
-import { validateRequest } from "../middlewares/validate-request";
+import { validateRequest } from "@ashraf.tickets/common";
 const router = express.Router();
 
 router.post(

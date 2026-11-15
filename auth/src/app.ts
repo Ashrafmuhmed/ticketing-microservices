@@ -4,8 +4,7 @@ import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
 import { currentuserRouter } from "./routes/current-user";
 import cookieSession from "cookie-session";
-import { errorHandler } from "./middlewares/error-handler";
-import { NotFoundError } from "./errors/not-found-error";
+import { errorHandler, NotFoundError } from "@ashraf.tickets/common";
 import mongoose from "mongoose";
 
 const app = express();
@@ -17,10 +16,12 @@ app.use(
     secure: process.env.NODE_ENV !== "test",
   }),
 );
+
 app.use(currentuserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+
 app.use(async (_, __, next) => {
   throw new NotFoundError("this route is not found");
 });
