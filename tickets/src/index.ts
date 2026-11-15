@@ -1,0 +1,22 @@
+import mongoose from "mongoose";
+import { app } from "./app";
+const start = async () => {
+  if (!process.env.JWT_SECRET) {
+    throw new Error("jwt secret is required");
+  }
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI must be defined");
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("db connected");
+  } catch (err) {
+    console.log(err);
+  }
+  app.listen(3000, () => {
+    console.log("Tickets service is listening on 3000");
+  });
+};
+
+start();
